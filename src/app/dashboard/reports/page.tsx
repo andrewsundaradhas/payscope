@@ -9,7 +9,7 @@ export default async function ReportsPage({
   const sp = (await searchParams) ?? {};
   const sample = sp.sample === "1";
   return (
-    <Suspense fallback={<div className="text-sm text-white/70">Loading…</div>}>
+    <Suspense fallback={<div className="text-sm text-[color:var(--ps-muted)]">Loading…</div>}>
       <ReportsClient sample={sample} />
     </Suspense>
   );

@@ -29,11 +29,11 @@ function KpiCard({ kpi }: { kpi: Kpi }) {
         ? "text-[var(--ps-warn)]"
         : kpi.tone === "bad"
           ? "text-[var(--ps-bad)]"
-          : "text-white/70";
+          : "text-[color:var(--ps-muted)]";
   return (
-    <div className="rounded-lg border border-white/10 bg-white/5 p-4">
-      <div className="text-xs font-semibold text-white/60">{kpi.label}</div>
-      <div className="mt-1 text-2xl font-semibold text-white">{kpi.value}</div>
+    <div className="rounded-lg border bg-[var(--ps-panel-2)] p-4">
+      <div className="text-xs font-semibold text-[color:var(--ps-subtle)]">{kpi.label}</div>
+      <div className="mt-1 text-2xl font-semibold text-[color:var(--ps-fg)]">{kpi.value}</div>
       {kpi.delta ? (
         <div className={cn("mt-2 text-xs font-semibold", tone)}>{kpi.delta}</div>
       ) : null}
@@ -44,17 +44,17 @@ function KpiCard({ kpi }: { kpi: Kpi }) {
 function InsightCard({ card }: { card: InsightCardT }) {
   const badgeTone = card.severity === "risk" ? "gold" : card.severity === "watch" ? "blue" : "neutral";
   return (
-    <div className="rounded-xl border border-white/10 bg-white/5 p-4">
+    <div className="rounded-xl border bg-[var(--ps-panel-2)] p-4">
       <div className="flex items-center justify-between gap-3">
-        <div className="text-sm font-semibold text-white">{card.title}</div>
+        <div className="text-sm font-semibold text-[color:var(--ps-fg)]">{card.title}</div>
         <Badge tone={badgeTone}>{card.severity.toUpperCase()}</Badge>
       </div>
-      <div className="mt-2 text-sm leading-6 text-white/70">{card.narrative}</div>
+      <div className="mt-2 text-sm leading-6 text-[color:var(--ps-muted)]">{card.narrative}</div>
       <div className="mt-3 grid gap-2 sm:grid-cols-3">
         {card.supportingMetrics.map((m) => (
-          <div key={m.label} className="rounded-lg border border-white/10 bg-[var(--ps-panel)] px-3 py-2">
-            <div className="text-[11px] font-semibold text-white/55">{m.label}</div>
-            <div className="mt-0.5 text-xs font-semibold text-white">{m.value}</div>
+          <div key={m.label} className="rounded-lg border bg-[var(--ps-panel)] px-3 py-2">
+            <div className="text-[11px] font-semibold text-[color:var(--ps-subtle)]">{m.label}</div>
+            <div className="mt-0.5 text-xs font-semibold text-[color:var(--ps-fg)]">{m.value}</div>
           </div>
         ))}
       </div>
@@ -109,8 +109,8 @@ export default function InsightsPage() {
     <div className="grid gap-6">
       <div className="flex items-start justify-between gap-4">
         <div>
-          <div className="text-sm font-semibold text-white">Insights</div>
-          <div className="mt-1 text-xs text-white/60">
+          <div className="text-sm font-semibold text-[color:var(--ps-fg)]">Insights</div>
+          <div className="mt-1 text-xs text-[color:var(--ps-subtle)]">
             Deterministic, analyst-style insights from mocked Visa/Mastercard reports. AI-ready APIs.
           </div>
         </div>
@@ -119,7 +119,7 @@ export default function InsightsPage() {
 
       {emptyState ? (
         <Card>
-          <CardContent className="py-10 text-sm text-white/70">{emptyState}</CardContent>
+          <CardContent className="py-10 text-sm text-[color:var(--ps-muted)]">{emptyState}</CardContent>
         </Card>
       ) : null}
 
@@ -140,20 +140,20 @@ export default function InsightsPage() {
             <Card className="lg:col-span-7">
               <CardHeader className="flex items-center justify-between">
                 <CardTitle>Transactions over time</CardTitle>
-                <div className="text-xs text-white/60">Count (filtered)</div>
+                <div className="text-xs text-[color:var(--ps-subtle)]">Count (filtered)</div>
               </CardHeader>
               <CardContent className="h-[320px]">
                 <ResponsiveContainer width="100%" height="100%">
                   <LineChart data={data.charts.transactionsOverTime}>
-                    <CartesianGrid stroke="rgba(255,255,255,0.08)" vertical={false} />
-                    <XAxis dataKey="dateISO" stroke="rgba(255,255,255,0.55)" fontSize={12} />
-                    <YAxis stroke="rgba(255,255,255,0.55)" fontSize={12} />
+                    <CartesianGrid stroke="rgba(15,23,42,0.10)" vertical={false} />
+                    <XAxis dataKey="dateISO" stroke="rgba(11,18,32,0.55)" fontSize={12} />
+                    <YAxis stroke="rgba(11,18,32,0.55)" fontSize={12} />
                     <Tooltip
                       contentStyle={{
-                        background: "rgba(15,26,46,0.98)",
-                        border: "1px solid rgba(255,255,255,0.10)",
+                        background: "rgba(255,255,255,0.98)",
+                        border: "1px solid rgba(15,23,42,0.12)",
                         borderRadius: 10,
-                        color: "rgba(255,255,255,0.9)",
+                        color: "rgba(11,18,32,0.9)",
                       }}
                     />
                     <Line
@@ -171,20 +171,20 @@ export default function InsightsPage() {
             <Card className="lg:col-span-5">
               <CardHeader className="flex items-center justify-between">
                 <CardTitle>Declines by hour</CardTitle>
-                <div className="text-xs text-white/60">Authorization only</div>
+                <div className="text-xs text-[color:var(--ps-subtle)]">Authorization only</div>
               </CardHeader>
               <CardContent className="h-[320px]">
                 <ResponsiveContainer width="100%" height="100%">
                   <BarChart data={data.charts.declinesByHour}>
-                    <CartesianGrid stroke="rgba(255,255,255,0.08)" vertical={false} />
-                    <XAxis dataKey="hour" stroke="rgba(255,255,255,0.55)" fontSize={12} />
-                    <YAxis stroke="rgba(255,255,255,0.55)" fontSize={12} />
+                    <CartesianGrid stroke="rgba(15,23,42,0.10)" vertical={false} />
+                    <XAxis dataKey="hour" stroke="rgba(11,18,32,0.55)" fontSize={12} />
+                    <YAxis stroke="rgba(11,18,32,0.55)" fontSize={12} />
                     <Tooltip
                       contentStyle={{
-                        background: "rgba(15,26,46,0.98)",
-                        border: "1px solid rgba(255,255,255,0.10)",
+                        background: "rgba(255,255,255,0.98)",
+                        border: "1px solid rgba(15,23,42,0.12)",
                         borderRadius: 10,
-                        color: "rgba(255,255,255,0.9)",
+                        color: "rgba(11,18,32,0.9)",
                       }}
                     />
                     <Bar dataKey="declines" fill="rgba(255,91,107,0.85)" radius={[6, 6, 0, 0]} />
@@ -197,20 +197,20 @@ export default function InsightsPage() {
           <Card>
             <CardHeader className="flex items-center justify-between">
               <CardTitle>Visa vs Mastercard comparison</CardTitle>
-              <div className="text-xs text-white/60">Cross-report view</div>
+              <div className="text-xs text-[color:var(--ps-subtle)]">Cross-report view</div>
             </CardHeader>
             <CardContent className="h-[280px]">
               <ResponsiveContainer width="100%" height="100%">
                 <BarChart data={data.charts.networkComparison}>
-                  <CartesianGrid stroke="rgba(255,255,255,0.08)" vertical={false} />
-                  <XAxis dataKey="label" stroke="rgba(255,255,255,0.55)" fontSize={12} />
-                  <YAxis stroke="rgba(255,255,255,0.55)" fontSize={12} />
+                  <CartesianGrid stroke="rgba(15,23,42,0.10)" vertical={false} />
+                  <XAxis dataKey="label" stroke="rgba(11,18,32,0.55)" fontSize={12} />
+                  <YAxis stroke="rgba(11,18,32,0.55)" fontSize={12} />
                   <Tooltip
                     contentStyle={{
-                      background: "rgba(15,26,46,0.98)",
-                      border: "1px solid rgba(255,255,255,0.10)",
+                      background: "rgba(255,255,255,0.98)",
+                      border: "1px solid rgba(15,23,42,0.12)",
                       borderRadius: 10,
-                      color: "rgba(255,255,255,0.9)",
+                      color: "rgba(11,18,32,0.9)",
                     }}
                   />
                   <Legend />

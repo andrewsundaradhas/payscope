@@ -19,9 +19,9 @@ type ParseResponse = { report: Report };
 
 function Metric({ label, value }: { label: string; value: string }) {
   return (
-    <div className="rounded-lg border border-white/10 bg-white/5 px-4 py-3">
-      <div className="text-xs font-semibold text-white/60">{label}</div>
-      <div className="mt-1 text-lg font-semibold text-white">{value}</div>
+    <div className="rounded-lg border bg-[var(--ps-panel-2)] px-4 py-3">
+      <div className="text-xs font-semibold text-[color:var(--ps-subtle)]">{label}</div>
+      <div className="mt-1 text-lg font-semibold text-[color:var(--ps-fg)]">{value}</div>
     </div>
   );
 }
@@ -105,9 +105,9 @@ export default function ReportsClient({ sample }: { sample: boolean }) {
             <Badge>Mock</Badge>
           </CardHeader>
           <CardContent className="space-y-3">
-            <div className="rounded-lg border border-white/10 bg-white/5 p-4">
-              <div className="text-sm font-semibold text-white">Upload report</div>
-              <div className="mt-1 text-xs text-white/60">
+            <div className="rounded-lg border bg-[var(--ps-panel-2)] p-4">
+              <div className="text-sm font-semibold text-[color:var(--ps-fg)]">Upload report</div>
+              <div className="mt-1 text-xs text-[color:var(--ps-subtle)]">
                 CSV / Excel / PDF supported (mocked). Uses `/api/reports/parse`.
               </div>
               <div className="mt-3 flex items-center gap-3">
@@ -158,16 +158,16 @@ export default function ReportsClient({ sample }: { sample: boolean }) {
                     type="button"
                     onClick={() => setSelectedReportId(r.id)}
                     className={cn(
-                      "w-full rounded-lg border border-white/10 px-4 py-3 text-left transition",
-                      active ? "bg-white/8" : "bg-white/5 hover:bg-white/8",
+                      "w-full rounded-lg border bg-[var(--ps-panel)] px-4 py-3 text-left transition",
+                      active ? "ring-2 ring-[rgba(20,52,203,0.18)]" : "hover:bg-black/[0.03]",
                     )}
                   >
                     <div className="flex items-start justify-between gap-3">
                       <div className="min-w-0">
-                        <div className="truncate text-sm font-semibold text-white">
+                        <div className="truncate text-sm font-semibold text-[color:var(--ps-fg)]">
                           {r.type}
                         </div>
-                        <div className="mt-0.5 truncate text-xs text-white/60">
+                        <div className="mt-0.5 truncate text-xs text-[color:var(--ps-subtle)]">
                           {r.network} · {formatISODate(r.dateRange.startISO)} →{" "}
                           {formatISODate(r.dateRange.endISO)}
                         </div>
@@ -203,14 +203,14 @@ export default function ReportsClient({ sample }: { sample: boolean }) {
             <CardHeader className="flex items-center justify-between">
               <CardTitle>Table Preview</CardTitle>
               {selectedReport ? (
-                <div className="text-xs text-white/60">
+                <div className="text-xs text-[color:var(--ps-subtle)]">
                   Showing first {Math.min(14, selectedReport.rows.length)} rows
                 </div>
               ) : null}
             </CardHeader>
             <CardContent>
               {!selectedReport ? (
-                <div className="text-sm text-white/70">
+                <div className="text-sm text-[color:var(--ps-muted)]">
                   Select a report to preview.
                 </div>
               ) : selectedReport.type === "Authorization" ? (
@@ -234,21 +234,21 @@ function TableShell({
   children: React.ReactNode;
 }) {
   return (
-    <div className="overflow-hidden rounded-lg border border-white/10">
+    <div className="overflow-hidden rounded-lg border bg-[var(--ps-panel)]">
       <table className="w-full border-collapse text-left text-xs">
-        <thead className="bg-white/5">
+        <thead className="bg-[var(--ps-panel-2)]">
           <tr>
             {headers.map((h) => (
               <th
                 key={h}
-                className="border-b border-white/10 px-3 py-2 font-semibold text-white/70"
+                className="border-b px-3 py-2 font-semibold text-[color:var(--ps-subtle)]"
               >
                 {h}
               </th>
             ))}
           </tr>
         </thead>
-        <tbody className="bg-[var(--ps-panel-2)]">{children}</tbody>
+        <tbody className="bg-[var(--ps-panel)]">{children}</tbody>
       </table>
     </div>
   );
@@ -269,19 +269,19 @@ function AuthPreview({ rows }: { rows: AuthRow[] }) {
       ]}
     >
       {rows.map((r) => (
-        <tr key={r.id} className="border-t border-white/10">
-          <td className="px-3 py-2 text-white/75">
+        <tr key={r.id} className="border-t">
+          <td className="px-3 py-2 text-[color:var(--ps-muted)]">
             {r.timestampISO.replace("T", " ").slice(0, 16)}Z
           </td>
-          <td className="px-3 py-2 text-white/75">{r.network}</td>
-          <td className="px-3 py-2 text-white/90">{r.merchantName}</td>
-          <td className="px-3 py-2 text-white/75">{r.mcc}</td>
-          <td className="px-3 py-2 text-white/75">{r.entryMode}</td>
-          <td className="px-3 py-2 text-white/90">{formatMoneyUSD(r.amount)}</td>
-          <td className="px-3 py-2 text-white/75">
+          <td className="px-3 py-2 text-[color:var(--ps-muted)]">{r.network}</td>
+          <td className="px-3 py-2 text-[color:var(--ps-fg)]">{r.merchantName}</td>
+          <td className="px-3 py-2 text-[color:var(--ps-muted)]">{r.mcc}</td>
+          <td className="px-3 py-2 text-[color:var(--ps-muted)]">{r.entryMode}</td>
+          <td className="px-3 py-2 text-[color:var(--ps-fg)]">{formatMoneyUSD(r.amount)}</td>
+          <td className="px-3 py-2 text-[color:var(--ps-muted)]">
             {r.responseCode}
             {!r.approved && r.declineReason ? (
-              <span className="ml-2 text-white/50">({r.declineReason})</span>
+              <span className="ml-2 text-[color:var(--ps-subtle)]">({r.declineReason})</span>
             ) : null}
           </td>
           <td className="px-3 py-2">
@@ -289,8 +289,8 @@ function AuthPreview({ rows }: { rows: AuthRow[] }) {
               className={cn(
                 "inline-flex rounded-full px-2 py-0.5 text-[11px] font-semibold",
                 r.approved
-                  ? "bg-[rgba(42,194,143,0.18)] text-white"
-                  : "bg-[rgba(255,91,107,0.18)] text-white",
+                  ? "bg-[rgba(42,194,143,0.16)] text-[color:var(--ps-fg)]"
+                  : "bg-[rgba(255,91,107,0.14)] text-[color:var(--ps-fg)]",
               )}
             >
               {r.approved ? "Yes" : "No"}
@@ -317,15 +317,15 @@ function SettlementPreview({ rows }: { rows: SettlementRow[] }) {
       ]}
     >
       {rows.map((r) => (
-        <tr key={r.id} className="border-t border-white/10">
-          <td className="px-3 py-2 text-white/75">{formatISODate(r.settlementDateISO)}</td>
-          <td className="px-3 py-2 text-white/75">{r.network}</td>
-          <td className="px-3 py-2 text-white/90">{r.merchantName}</td>
-          <td className="px-3 py-2 text-white/90">{formatInt(r.txCount)}</td>
-          <td className="px-3 py-2 text-white/90">{formatMoneyUSD(r.grossAmount)}</td>
-          <td className="px-3 py-2 text-white/90">{formatMoneyUSD(r.interchangeFees)}</td>
-          <td className="px-3 py-2 text-white/90">{formatMoneyUSD(r.netAmount)}</td>
-          <td className="px-3 py-2 text-white/75">{r.settlementDelayDays}</td>
+        <tr key={r.id} className="border-t">
+          <td className="px-3 py-2 text-[color:var(--ps-muted)]">{formatISODate(r.settlementDateISO)}</td>
+          <td className="px-3 py-2 text-[color:var(--ps-muted)]">{r.network}</td>
+          <td className="px-3 py-2 text-[color:var(--ps-fg)]">{r.merchantName}</td>
+          <td className="px-3 py-2 text-[color:var(--ps-fg)]">{formatInt(r.txCount)}</td>
+          <td className="px-3 py-2 text-[color:var(--ps-fg)]">{formatMoneyUSD(r.grossAmount)}</td>
+          <td className="px-3 py-2 text-[color:var(--ps-fg)]">{formatMoneyUSD(r.interchangeFees)}</td>
+          <td className="px-3 py-2 text-[color:var(--ps-fg)]">{formatMoneyUSD(r.netAmount)}</td>
+          <td className="px-3 py-2 text-[color:var(--ps-muted)]">{r.settlementDelayDays}</td>
         </tr>
       ))}
     </TableShell>

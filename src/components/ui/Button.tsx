@@ -17,8 +17,9 @@ export function Button({ className, variant = "primary", ...props }: Props) {
         variant === "primary" &&
           "bg-[var(--ps-blue)] text-white hover:bg-[var(--ps-blue-2)]",
         variant === "secondary" &&
-          "border border-white/10 bg-white/5 text-white hover:bg-white/8",
-        variant === "ghost" && "text-white/80 hover:bg-white/5 hover:text-white",
+          "border bg-[var(--ps-panel)] text-[color:var(--ps-fg)] hover:bg-black/[0.03]",
+        variant === "ghost" &&
+          "text-[color:var(--ps-muted)] hover:bg-black/[0.03] hover:text-[color:var(--ps-fg)]",
         className,
       )}
     />
@@ -43,8 +44,9 @@ export function LinkButton({
         variant === "primary" &&
           "bg-[var(--ps-blue)] text-white hover:bg-[var(--ps-blue-2)]",
         variant === "secondary" &&
-          "border border-white/10 bg-white/5 text-white hover:bg-white/8",
-        variant === "ghost" && "text-white/80 hover:bg-white/5 hover:text-white",
+          "border bg-[var(--ps-panel)] text-[color:var(--ps-fg)] hover:bg-black/[0.03]",
+        variant === "ghost" &&
+          "text-[color:var(--ps-muted)] hover:bg-black/[0.03] hover:text-[color:var(--ps-fg)]",
         className,
       )}
     />

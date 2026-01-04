@@ -95,8 +95,8 @@ export default function ChatPage() {
     <div className="grid gap-6">
       <div className="flex items-start justify-between gap-4">
         <div>
-          <div className="text-sm font-semibold text-white">AI Chat</div>
-          <div className="mt-1 text-xs text-white/60">
+          <div className="text-sm font-semibold text-[color:var(--ps-fg)]">AI Chat</div>
+          <div className="mt-1 text-xs text-[color:var(--ps-subtle)]">
             ChatGPT-style UI. Deterministic responses via structured `/api/chat` (AI-ready).
           </div>
         </div>
@@ -115,19 +115,19 @@ export default function ChatPage() {
             ) : null}
           </CardHeader>
           <CardContent>
-            <div className="h-[520px] overflow-auto rounded-xl border border-white/10 bg-[var(--ps-panel-2)] p-4">
+            <div className="h-[520px] overflow-auto rounded-xl border bg-[var(--ps-panel-2)] p-4">
               <div className="space-y-3">
                 {thread.map((m, idx) => (
                   <div
                     key={idx}
                     className={cn(
-                      "max-w-[92%] rounded-xl border border-white/10 px-4 py-3 text-sm leading-6",
+                      "max-w-[92%] rounded-xl border px-4 py-3 text-sm leading-6",
                       m.role === "user"
-                        ? "ml-auto bg-white/8 text-white"
-                        : "bg-white/5 text-white/85",
+                        ? "ml-auto bg-[var(--ps-panel)] text-[color:var(--ps-fg)]"
+                        : "bg-[var(--ps-panel)] text-[color:var(--ps-muted)]",
                     )}
                   >
-                    <div className="mb-1 text-[11px] font-semibold text-white/55">
+                    <div className="mb-1 text-[11px] font-semibold text-[color:var(--ps-subtle)]">
                       {m.role === "user" ? "You" : "PayScope Analyst"}
                     </div>
                     <pre className="whitespace-pre-wrap font-sans">{m.content}</pre>
@@ -143,7 +143,7 @@ export default function ChatPage() {
                 onChange={(e) => setInput(e.target.value)}
                 placeholder={selectedReport ? "Ask about declines, settlement volume, interchange…" : "Select a report to start chatting…"}
                 disabled={!selectedReport || sending}
-                className="min-h-[44px] flex-1 resize-none rounded-md border border-white/10 bg-white/5 px-3 py-2 text-sm text-white/90 outline-none focus-visible:ring-2 focus-visible:ring-[var(--ps-gold)] disabled:opacity-60"
+                className="min-h-[44px] flex-1 resize-none rounded-md border bg-[var(--ps-panel)] px-3 py-2 text-sm text-[color:var(--ps-fg)] outline-none focus-visible:ring-2 focus-visible:ring-[var(--ps-gold)] disabled:opacity-60"
                 onKeyDown={(e) => {
                   if (e.key === "Enter" && !e.shiftKey) {
                     e.preventDefault();
@@ -155,7 +155,7 @@ export default function ChatPage() {
                 {sending ? "Thinking…" : "Send"}
               </Button>
             </div>
-            <div className="mt-2 text-[11px] text-white/50">
+            <div className="mt-2 text-[11px] text-[color:var(--ps-subtle)]">
               Press Enter to send · Shift+Enter for newline
             </div>
           </CardContent>
@@ -170,16 +170,16 @@ export default function ChatPage() {
               <button
                 key={q}
                 type="button"
-                className="w-full rounded-lg border border-white/10 bg-white/5 px-4 py-3 text-left text-sm font-semibold text-white/80 transition hover:bg-white/8 hover:text-white"
+                className="w-full rounded-lg border bg-[var(--ps-panel)] px-4 py-3 text-left text-sm font-semibold text-[color:var(--ps-muted)] transition hover:bg-black/[0.03] hover:text-[color:var(--ps-fg)]"
                 onClick={() => setInput(q)}
               >
                 {q}
               </button>
             ))}
 
-            <div className="mt-4 rounded-lg border border-white/10 bg-[var(--ps-panel)] p-4">
-              <div className="text-xs font-semibold text-white/60">AI-ready note</div>
-              <div className="mt-1 text-xs leading-5 text-white/60">
+            <div className="mt-4 rounded-lg border bg-[var(--ps-panel)] p-4">
+              <div className="text-xs font-semibold text-[color:var(--ps-subtle)]">AI-ready note</div>
+              <div className="mt-1 text-xs leading-5 text-[color:var(--ps-subtle)]">
                 Requests are structured to support future RAG (report embeddings + citations). For demo, responses are deterministic and reference computed metrics.
               </div>
             </div>

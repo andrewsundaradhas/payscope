@@ -6,7 +6,7 @@ export function Card({ className, ...props }: ComponentProps<"div">) {
     <div
       {...props}
       className={cn(
-        "rounded-xl border border-white/10 bg-[var(--ps-panel)] shadow-[var(--ps-shadow)]",
+        "rounded-xl border bg-[var(--ps-panel)] shadow-[var(--ps-shadow)]",
         className,
       )}
     />
@@ -21,7 +21,10 @@ export function CardTitle({ className, ...props }: ComponentProps<"div">) {
   return (
     <div
       {...props}
-      className={cn("text-sm font-semibold tracking-tight text-white", className)}
+      className={cn(
+        "text-sm font-semibold tracking-tight text-[color:var(--ps-fg)]",
+        className,
+      )}
     />
   );
 }

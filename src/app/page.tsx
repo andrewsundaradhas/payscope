@@ -6,10 +6,22 @@ export default function Home() {
     <div className="min-h-screen bg-[var(--ps-bg)]">
       <header className="mx-auto flex max-w-6xl items-center justify-between px-6 py-6">
         <div className="flex items-center gap-3">
-          <div className="text-base font-semibold tracking-tight text-white">
-            PayScope
+          <div className="flex items-center gap-3">
+            <div className="grid h-9 w-9 place-items-center rounded-lg border bg-[var(--ps-panel)] shadow-sm">
+              <div className="h-2.5 w-2.5 rounded-full bg-[var(--ps-blue)]" />
+            </div>
+            <div>
+              <div className="text-base font-semibold tracking-tight text-[color:var(--ps-fg)]">
+                PayScope
+              </div>
+              <div className="text-xs text-[color:var(--ps-subtle)]">
+                Visa-style internal analytics demo
+              </div>
+            </div>
           </div>
-          <Badge tone="gold">Visa Hackathon (Mock)</Badge>
+          <Badge tone="gold" className="hidden sm:inline-flex">
+            Visa Hackathon (Mock)
+          </Badge>
         </div>
         <div className="hidden items-center gap-2 md:flex">
           <Badge tone="blue">AI-ready</Badge>
@@ -17,20 +29,20 @@ export default function Home() {
         </div>
       </header>
 
-      <main className="mx-auto max-w-6xl px-6 pb-16 pt-12">
+      <main className="mx-auto max-w-6xl px-6 pb-16 pt-10">
         <div className="grid gap-10 md:grid-cols-12">
           <div className="md:col-span-7">
-            <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs font-semibold text-white/80">
-              Built for reporting intelligence (not a payment system)
+            <div className="inline-flex items-center gap-2 rounded-full border bg-[var(--ps-panel)] px-3 py-1 text-xs font-semibold text-[color:var(--ps-muted)] shadow-sm">
+              Built for reporting intelligence · Not a payment system
             </div>
 
-            <h1 className="mt-5 text-4xl font-semibold leading-tight tracking-tight text-white md:text-5xl">
+            <h1 className="mt-5 text-4xl font-semibold leading-tight tracking-tight text-[color:var(--ps-fg)] md:text-6xl">
               PayScoper — Turn Payment Reports into Intelligence
             </h1>
 
-            <p className="mt-4 max-w-xl text-base leading-7 text-white/70">
-              AI-powered analytics for Visa & Mastercard authorization,
-              settlement, and reconciliation reports.
+            <p className="mt-4 max-w-xl text-base leading-7 text-[color:var(--ps-muted)]">
+              AI-powered analytics for Visa & Mastercard authorization, settlement, and reconciliation reports.
+              Transform static files into interactive dashboards and analyst-style explanations.
             </p>
 
             <div className="mt-7 flex flex-col gap-3 sm:flex-row">
@@ -45,91 +57,129 @@ export default function Home() {
               </LinkButton>
             </div>
 
-            <div className="mt-10 grid gap-3 sm:grid-cols-3">
-              <div className="rounded-xl border border-white/10 bg-[var(--ps-panel)] p-4">
-                <div className="text-xs font-semibold text-white/60">
-                  Upload or select reports
+            <div className="mt-9 grid gap-3 sm:grid-cols-3">
+              <div className="rounded-xl border bg-[var(--ps-panel)] p-4 shadow-sm">
+                <div className="text-xs font-semibold text-[color:var(--ps-subtle)]">
+                  Reports
                 </div>
-                <div className="mt-1 text-sm font-semibold text-white">
-                  Authorization + settlement
+                <div className="mt-1 text-sm font-semibold text-[color:var(--ps-fg)]">
+                  Upload or select Visa/Mastercard files
                 </div>
-              </div>
-              <div className="rounded-xl border border-white/10 bg-[var(--ps-panel)] p-4">
-                <div className="text-xs font-semibold text-white/60">
-                  Dynamic dashboards
-                </div>
-                <div className="mt-1 text-sm font-semibold text-white">
-                  KPIs + charts
+                <div className="mt-1 text-xs text-[color:var(--ps-subtle)]">
+                  Authorization + settlement formats (mock parse)
                 </div>
               </div>
-              <div className="rounded-xl border border-white/10 bg-[var(--ps-panel)] p-4">
-                <div className="text-xs font-semibold text-white/60">
-                  Conversational insights
+              <div className="rounded-xl border bg-[var(--ps-panel)] p-4 shadow-sm">
+                <div className="text-xs font-semibold text-[color:var(--ps-subtle)]">
+                  Dashboards
                 </div>
-                <div className="mt-1 text-sm font-semibold text-white">
-                  Analyst-style answers
+                <div className="mt-1 text-sm font-semibold text-[color:var(--ps-fg)]">
+                  KPIs + charts, instantly generated
+                </div>
+                <div className="mt-1 text-xs text-[color:var(--ps-subtle)]">
+                  Declines by hour, trends, comparisons
                 </div>
               </div>
+              <div className="rounded-xl border bg-[var(--ps-panel)] p-4 shadow-sm">
+                <div className="text-xs font-semibold text-[color:var(--ps-subtle)]">
+                  Insights
+                </div>
+                <div className="mt-1 text-sm font-semibold text-[color:var(--ps-fg)]">
+                  Analyst-style explanations you can ask for
+                </div>
+                <div className="mt-1 text-xs text-[color:var(--ps-subtle)]">
+                  Deterministic mock AI, AI-ready structure
+                </div>
+              </div>
+            </div>
+
+            <div className="mt-8 flex flex-wrap items-center gap-3 text-xs text-[color:var(--ps-subtle)]">
+              <span className="inline-flex items-center gap-2 rounded-full border bg-[var(--ps-panel)] px-3 py-1 shadow-sm">
+                <span className="h-1.5 w-1.5 rounded-full bg-[var(--ps-blue)]" />
+                Enterprise-grade UX
+              </span>
+              <span className="inline-flex items-center gap-2 rounded-full border bg-[var(--ps-panel)] px-3 py-1 shadow-sm">
+                <span className="h-1.5 w-1.5 rounded-full bg-[var(--ps-gold)]" />
+                Deterministic demo data
+              </span>
+              <span className="inline-flex items-center gap-2 rounded-full border bg-[var(--ps-panel)] px-3 py-1 shadow-sm">
+                <span className="h-1.5 w-1.5 rounded-full bg-[var(--ps-good)]" />
+                AI-ready API routes
+              </span>
             </div>
           </div>
 
           <div className="md:col-span-5">
-            <div className="rounded-2xl border border-white/10 bg-[var(--ps-panel)] p-6 shadow-[var(--ps-shadow)]">
+            <div className="rounded-2xl border bg-[var(--ps-panel)] p-6 shadow-[var(--ps-shadow)]">
               <div className="flex items-center justify-between">
-                <div className="text-sm font-semibold text-white">
-                  Demo Highlights
+                <div>
+                  <div className="text-sm font-semibold text-[color:var(--ps-fg)]">
+                    Intelligence Brief
+                  </div>
+                  <div className="mt-0.5 text-xs text-[color:var(--ps-subtle)]">
+                    Example output from a parsed authorization report
+                  </div>
                 </div>
-                <Badge tone="blue">Mock AI</Badge>
+                <Badge tone="blue">Demo</Badge>
               </div>
 
-              <div className="mt-5 space-y-3 text-sm text-white/75">
-                <div className="flex items-start justify-between gap-3 rounded-lg border border-white/10 bg-white/5 px-4 py-3">
-                  <div>
-                    <div className="font-semibold text-white">Declines by hour</div>
-                    <div className="text-xs text-white/60">
-                      Spot spikes after 10 PM
-                    </div>
+              <div className="mt-5 grid gap-3 sm:grid-cols-2">
+                <div className="rounded-xl border bg-[var(--ps-panel-2)] p-4">
+                  <div className="text-xs font-semibold text-[color:var(--ps-subtle)]">
+                    Authorization success rate
                   </div>
-                  <div className="text-xs font-semibold text-[var(--ps-gold)]">
-                    Watch
+                  <div className="mt-1 text-2xl font-semibold text-[color:var(--ps-fg)]">
+                    91.8%
                   </div>
-                </div>
-                <div className="flex items-start justify-between gap-3 rounded-lg border border-white/10 bg-white/5 px-4 py-3">
-                  <div>
-                    <div className="font-semibold text-white">
-                      Settlement delays
-                    </div>
-                    <div className="text-xs text-white/60">
-                      Correlate cross-border batches
-                    </div>
-                  </div>
-                  <div className="text-xs font-semibold text-[var(--ps-gold)]">
-                    Insight
+                  <div className="mt-2 text-xs font-semibold text-[color:var(--ps-warn)]">
+                    Declines elevated after 10 PM
                   </div>
                 </div>
-                <div className="flex items-start justify-between gap-3 rounded-lg border border-white/10 bg-white/5 px-4 py-3">
-                  <div>
-                    <div className="font-semibold text-white">
-                      Visa vs Mastercard
-                    </div>
-                    <div className="text-xs text-white/60">
-                      Compare approval & volume
-                    </div>
+                <div className="rounded-xl border bg-[var(--ps-panel-2)] p-4">
+                  <div className="text-xs font-semibold text-[color:var(--ps-subtle)]">
+                    Net settlement volume
                   </div>
-                  <div className="text-xs font-semibold text-[var(--ps-gold)]">
-                    Compare
+                  <div className="mt-1 text-2xl font-semibold text-[color:var(--ps-fg)]">
+                    $1.92M
+                  </div>
+                  <div className="mt-2 text-xs font-semibold text-[color:var(--ps-subtle)]">
+                    Interchange trending upward
                   </div>
                 </div>
               </div>
 
-              <div className="mt-6 border-t border-white/10 pt-5 text-xs text-white/60">
-                AI is mocked and deterministic. API routes are structured for
-                future RAG integration.
+              <div className="mt-4 overflow-hidden rounded-xl border">
+                <div className="flex items-center justify-between bg-[var(--ps-panel-2)] px-4 py-3">
+                  <div className="text-xs font-semibold text-[color:var(--ps-subtle)]">
+                    Key observations
+                  </div>
+                  <div className="text-xs font-semibold text-[color:var(--ps-blue)]">
+                    Generated
+                  </div>
+                </div>
+                <div className="space-y-0 border-t bg-[var(--ps-panel)]">
+                  <Row label="Declines by hour" value="Peak 22:00–23:00 UTC" />
+                  <Row label="Cross-border correlation" value="Higher settlement delays" />
+                  <Row label="Network comparison" value="Visa vs Mastercard deltas" />
+                </div>
+              </div>
+
+              <div className="mt-5 border-t pt-4 text-xs text-[color:var(--ps-subtle)]">
+                AI is mocked and deterministic. API routes are structured for future RAG integration.
               </div>
             </div>
           </div>
         </div>
       </main>
+    </div>
+  );
+}
+
+function Row({ label, value }: { label: string; value: string }) {
+  return (
+    <div className="flex items-center justify-between gap-3 px-4 py-3">
+      <div className="text-sm font-semibold text-[color:var(--ps-fg)]">{label}</div>
+      <div className="text-xs font-semibold text-[color:var(--ps-muted)]">{value}</div>
     </div>
   );
 }

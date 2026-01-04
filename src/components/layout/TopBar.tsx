@@ -21,16 +21,16 @@ export function TopBar() {
   }, [reportSummaries, selectedReportId]);
 
   return (
-    <header className="flex h-14 items-center justify-between border-b border-white/10 bg-[var(--ps-panel)] px-6">
+    <header className="flex h-14 items-center justify-between border-b bg-[var(--ps-panel)] px-6">
       <div className="flex min-w-0 items-center gap-3">
-        <div className="text-xs font-semibold uppercase tracking-wide text-white/55">
+        <div className="text-xs font-semibold uppercase tracking-wide text-[color:var(--ps-subtle)]">
           Selected report
         </div>
-        <div className="min-w-0 truncate text-sm font-semibold text-white">
+        <div className="min-w-0 truncate text-sm font-semibold text-[color:var(--ps-fg)]">
           {reportLabel}
         </div>
         {selectedReport ? (
-          <div className="hidden text-xs text-white/55 md:block">
+          <div className="hidden text-xs text-[color:var(--ps-subtle)] md:block">
             {selectedReport.type} · {selectedReport.network}
           </div>
         ) : null}
@@ -38,7 +38,7 @@ export function TopBar() {
 
       <div className="flex items-center gap-3">
         <div className="hidden items-center gap-2 md:flex">
-          <div className="text-xs font-semibold uppercase tracking-wide text-white/55">
+          <div className="text-xs font-semibold uppercase tracking-wide text-[color:var(--ps-subtle)]">
             Report
           </div>
           <Select
@@ -55,7 +55,7 @@ export function TopBar() {
         </div>
 
         <div className="flex items-center gap-2">
-          <div className="hidden text-xs font-semibold uppercase tracking-wide text-white/55 md:block">
+          <div className="hidden text-xs font-semibold uppercase tracking-wide text-[color:var(--ps-subtle)] md:block">
             Date range
           </div>
           <Select
@@ -71,7 +71,7 @@ export function TopBar() {
         </div>
 
         <div className="flex items-center gap-2">
-          <div className="hidden text-xs font-semibold uppercase tracking-wide text-white/55 md:block">
+          <div className="hidden text-xs font-semibold uppercase tracking-wide text-[color:var(--ps-subtle)] md:block">
             Network
           </div>
           <Select

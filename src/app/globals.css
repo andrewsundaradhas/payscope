@@ -2,14 +2,14 @@
 
 :root {
   /* PayScope — Visa-style palette (no gradients, enterprise neutral) */
-  --ps-bg: #0b1220;
-  --ps-panel: #0f1a2e;
-  --ps-panel-2: #111f36;
-  --ps-border: rgba(255, 255, 255, 0.08);
+  --ps-bg: #f6f8fc;
+  --ps-panel: #ffffff;
+  --ps-panel-2: #f9fbff;
+  --ps-border: rgba(15, 23, 42, 0.12);
 
-  --ps-fg: rgba(255, 255, 255, 0.92);
-  --ps-muted: rgba(255, 255, 255, 0.68);
-  --ps-subtle: rgba(255, 255, 255, 0.56);
+  --ps-fg: rgba(11, 18, 32, 0.94);
+  --ps-muted: rgba(11, 18, 32, 0.72);
+  --ps-subtle: rgba(11, 18, 32, 0.56);
 
   --ps-blue: #1434cb; /* Visa blue */
   --ps-blue-2: #1d3ef0;
@@ -18,7 +18,7 @@
   --ps-warn: #f5b745;
   --ps-bad: #ff5b6b;
 
-  --ps-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+  --ps-shadow: 0 10px 22px rgba(15, 23, 42, 0.08);
 }
 
 @theme inline {
@@ -40,5 +40,5 @@ body {
 }
 
 ::selection {
-  background: rgba(247, 182, 0, 0.22);
+  background: rgba(247, 182, 0, 0.26);
 }
