@@ -13,6 +13,7 @@ This directory contains the machine learning backend for PayScope.
 ## Getting Started
 
 1. Install dependencies:
+
 ```bash
 pip install -r requirements.txt
 ```
@@ -20,6 +21,7 @@ pip install -r requirements.txt
 2. Set up your environment variables in `.env`
 
 3. Run the API server:
+
 ```bash
 python api/main.py
 ```
@@ -27,4 +29,3 @@ python api/main.py
 ## Development
 
 Add your ML models, data processing pipelines, and API endpoints in their respective directories.
-
