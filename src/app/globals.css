@@ -2,9 +2,9 @@
 
 :root {
   /* PayScope — Visa-style palette (no gradients, enterprise neutral) */
-  --ps-bg: #f6f8fc;
+  --ps-bg: #ffffff;
   --ps-panel: #ffffff;
-  --ps-panel-2: #f9fbff;
+  --ps-panel-2: #f6f8fc;
   --ps-border: rgba(15, 23, 42, 0.12);
 
   --ps-fg: rgba(11, 18, 32, 0.94);
@@ -18,7 +18,7 @@
   --ps-warn: #f5b745;
   --ps-bad: #ff5b6b;
 
-  --ps-shadow: 0 10px 22px rgba(15, 23, 42, 0.08);
+  --ps-shadow: 0 12px 26px rgba(15, 23, 42, 0.08);
 }
 
 @theme inline {
