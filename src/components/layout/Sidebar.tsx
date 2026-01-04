@@ -1,0 +1,64 @@
+"use client";
+
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { cn } from "@/lib/utils";
+import { Badge } from "@/components/ui/Badge";
+
+const NAV = [
+  { href: "/dashboard/reports", label: "Reports" },
+  { href: "/dashboard/insights", label: "Insights" },
+  { href: "/dashboard/chat", label: "AI Chat" },
+] as const;
+
+export function Sidebar() {
+  const pathname = usePathname();
+
+  return (
+    <aside className="flex h-full w-[260px] flex-col border-r border-white/10 bg-[var(--ps-panel)]">
+      <div className="flex items-start justify-between px-5 pt-5 pb-4">
+        <div>
+          <div className="text-base font-semibold tracking-tight text-white">
+            PayScope
+          </div>
+          <div className="text-xs text-white/60">Reporting Intelligence</div>
+        </div>
+        <Badge tone="gold" className="mt-0.5">
+          Visa Hackathon (Mock)
+        </Badge>
+      </div>
+
+      <nav className="px-3">
+        <div className="space-y-1">
+          {NAV.map((item) => {
+            const active = pathname === item.href;
+            return (
+              <Link
+                key={item.href}
+                href={item.href}
+                className={cn(
+                  "flex h-10 items-center rounded-md px-3 text-sm font-semibold transition",
+                  active
+                    ? "bg-white/8 text-white"
+                    : "text-white/75 hover:bg-white/5 hover:text-white",
+                )}
+              >
+                {item.label}
+              </Link>
+            );
+          })}
+        </div>
+      </nav>
+
+      <div className="mt-auto border-t border-white/10 px-5 py-4">
+        <div className="text-xs text-white/60">Mock Auth</div>
+        <div className="mt-1 text-sm font-semibold text-white">
+          Demo Analyst
+        </div>
+        <div className="text-xs text-white/60">Visa Internal Analytics</div>
+      </div>
+    </aside>
+  );
+}
+
+

@@ -1,0 +1,44 @@
+@import "tailwindcss";
+
+:root {
+  /* PayScope — Visa-style palette (no gradients, enterprise neutral) */
+  --ps-bg: #0b1220;
+  --ps-panel: #0f1a2e;
+  --ps-panel-2: #111f36;
+  --ps-border: rgba(255, 255, 255, 0.08);
+
+  --ps-fg: rgba(255, 255, 255, 0.92);
+  --ps-muted: rgba(255, 255, 255, 0.68);
+  --ps-subtle: rgba(255, 255, 255, 0.56);
+
+  --ps-blue: #1434cb; /* Visa blue */
+  --ps-blue-2: #1d3ef0;
+  --ps-gold: #f7b600;
+  --ps-good: #2ac28f;
+  --ps-warn: #f5b745;
+  --ps-bad: #ff5b6b;
+
+  --ps-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+}
+
+@theme inline {
+  --color-background: var(--ps-bg);
+  --color-foreground: var(--ps-fg);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+body {
+  background: var(--ps-bg);
+  color: var(--ps-fg);
+  font-family: var(--font-sans), ui-sans-serif, system-ui, -apple-system,
+    Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+}
+
+* {
+  border-color: var(--ps-border);
+}
+
+::selection {
+  background: rgba(247, 182, 0, 0.22);
+}
