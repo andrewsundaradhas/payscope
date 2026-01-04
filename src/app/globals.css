@@ -18,6 +18,10 @@
   --ps-warn: #f5b745;
   --ps-bad: #ff5b6b;
 
+  /* Dark hero panel (used for dashboard-style highlights) */
+  --ps-ink: #0b1220;
+  --ps-ink-2: #0f1a2e;
+
   --ps-shadow: 0 12px 26px rgba(15, 23, 42, 0.08);
 }
 

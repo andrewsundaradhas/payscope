@@ -50,7 +50,7 @@ export default function Home() {
             </div>
 
             <h1 className="mt-5 text-4xl font-semibold leading-[1.06] tracking-tight text-[color:var(--ps-fg)] md:text-6xl">
-              PayScoper — Turn payment reports into{" "}
+              PayScope — Turn payment reports into{" "}
               <span className="text-[color:var(--ps-blue)]">intelligence</span>.
             </h1>
 
