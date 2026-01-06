@@ -1,0 +1,12 @@
+{
+  "4": {
+    "fraud": {
+      "status": "skipped",
+      "reason": "no_fraud_column"
+    },
+    "forecasting": {
+      "status": "skipped",
+      "reason": "missing_columns"
+    }
+  }
+}

@@ -21,16 +21,16 @@ export function TopBar() {
   }, [reportSummaries, selectedReportId]);
 
   return (
-    <header className="flex h-14 items-center justify-between border-b bg-[var(--ps-panel)] px-6">
+    <header className="flex h-14 items-center justify-between border-b border-[#E8E8E8] bg-white px-6">
       <div className="flex min-w-0 items-center gap-3">
-        <div className="text-xs font-semibold uppercase tracking-wide text-[color:var(--ps-subtle)]">
+        <div className="text-xs font-semibold uppercase tracking-wide text-[#1C2B1C]/50">
           Selected report
         </div>
-        <div className="min-w-0 truncate text-sm font-semibold text-[color:var(--ps-fg)]">
+        <div className="min-w-0 truncate text-sm font-semibold text-[#1C2B1C]">
           {reportLabel}
         </div>
         {selectedReport ? (
-          <div className="hidden text-xs text-[color:var(--ps-subtle)] md:block">
+          <div className="hidden text-xs text-[#1C2B1C]/50 md:block">
             {selectedReport.type} · {selectedReport.network}
           </div>
         ) : null}
@@ -38,7 +38,7 @@ export function TopBar() {
 
       <div className="flex items-center gap-3">
         <div className="hidden items-center gap-2 md:flex">
-          <div className="text-xs font-semibold uppercase tracking-wide text-[color:var(--ps-subtle)]">
+          <div className="text-xs font-semibold uppercase tracking-wide text-[#1C2B1C]/50">
             Report
           </div>
           <Select
@@ -55,7 +55,7 @@ export function TopBar() {
         </div>
 
         <div className="flex items-center gap-2">
-          <div className="hidden text-xs font-semibold uppercase tracking-wide text-[color:var(--ps-subtle)] md:block">
+          <div className="hidden text-xs font-semibold uppercase tracking-wide text-[#1C2B1C]/50 md:block">
             Date range
           </div>
           <Select
@@ -71,7 +71,7 @@ export function TopBar() {
         </div>
 
         <div className="flex items-center gap-2">
-          <div className="hidden text-xs font-semibold uppercase tracking-wide text-[color:var(--ps-subtle)] md:block">
+          <div className="hidden text-xs font-semibold uppercase tracking-wide text-[#1C2B1C]/50 md:block">
             Network
           </div>
           <Select
@@ -89,5 +89,3 @@ export function TopBar() {
     </header>
   );
 }
-
-

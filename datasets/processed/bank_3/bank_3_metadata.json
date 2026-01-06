@@ -1,0 +1,21 @@
+{
+  "bank_id": 3,
+  "dataset_name": "PaySim",
+  "source": "ealaxi/paysim1",
+  "original_rows": 6362620,
+  "processed_rows": 120000,
+  "columns": [
+    "step",
+    "type",
+    "amount",
+    "nameOrig",
+    "oldbalanceOrg",
+    "newbalanceOrig",
+    "nameDest",
+    "oldbalanceDest",
+    "newbalanceDest",
+    "is_fraud",
+    "is_flagged_fraud"
+  ],
+  "checksum": "95c8978fe7b20d73dd2b3330d2d2f5c64bc0a1a4b57858dc393811383f296690"
+}

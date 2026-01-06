@@ -1,0 +1,58 @@
+version: "3.9"
+
+services:
+  # Base services - can be overridden by docker-compose.override.yml
+  postgres:
+    image: timescale/timescaledb:pg14-latest
+    environment:
+      POSTGRES_DB: payscope
+      POSTGRES_USER: payscope
+      POSTGRES_PASSWORD: payscope
+    ports:
+      - "5432:5432"
+    volumes:
+      - payscope_pg:/var/lib/postgresql/data
+
+  redis:
+    image: redis:7
+    ports:
+      - "6379:6379"
+    volumes:
+      - payscope_redis:/data
+
+  minio:
+    image: minio/minio
+    command: server /data --console-address ":9001"
+    environment:
+      MINIO_ROOT_USER: payscope
+      MINIO_ROOT_PASSWORD: payscope-secret
+    ports:
+      - "9000:9000"
+      - "9001:9001"
+    volumes:
+      - payscope_minio:/data
+
+  neo4j:
+    image: neo4j:5
+    environment:
+      NEO4J_AUTH: neo4j/zGJedIu6jdDiNJ99rZYkRVJC0t7_txINuNTduREVqqM
+      NEO4J_PLUGINS: '["apoc"]'
+    ports:
+      - "7474:7474"
+      - "7687:7687"
+    volumes:
+      - neo4j_data:/data
+      - neo4j_logs:/logs
+    healthcheck:
+      test: ["CMD", "cypher-shell", "-u", "neo4j", "-p", "zGJedIu6jdDiNJ99rZYkRVJC0t7_txINuNTduREVqqM", "RETURN 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  payscope_pg:
+  payscope_redis:
+  payscope_minio:
+  neo4j_data:
+  neo4j_logs:
+

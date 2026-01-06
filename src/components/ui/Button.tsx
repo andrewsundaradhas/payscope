@@ -13,13 +13,13 @@ export function Button({ className, variant = "primary", ...props }: Props) {
     <button
       {...props}
       className={cn(
-        "inline-flex h-10 items-center justify-center gap-2 rounded-md px-4 text-sm font-semibold transition focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ps-gold)] disabled:cursor-not-allowed disabled:opacity-60",
+        "inline-flex h-10 items-center justify-center gap-2 rounded-lg px-4 text-sm font-semibold transition focus:outline-none focus-visible:ring-2 focus-visible:ring-[#bef264] disabled:cursor-not-allowed disabled:opacity-60",
         variant === "primary" &&
-          "bg-[var(--ps-blue)] text-white hover:bg-[var(--ps-blue-2)]",
+          "bg-[#1C2B1C] text-white hover:bg-[#2a3d2a]",
         variant === "secondary" &&
-          "border bg-[var(--ps-panel)] text-[color:var(--ps-fg)] hover:bg-black/[0.03]",
+          "border border-[#E8E8E8] bg-white text-[#1C2B1C] hover:bg-[#F5F5F5]",
         variant === "ghost" &&
-          "text-[color:var(--ps-muted)] hover:bg-black/[0.03] hover:text-[color:var(--ps-fg)]",
+          "text-[#1C2B1C]/70 hover:bg-[#F5F5F5] hover:text-[#1C2B1C]",
         className,
       )}
     />
@@ -40,17 +40,15 @@ export function LinkButton({
     <Link
       {...props}
       className={cn(
-        "inline-flex h-10 items-center justify-center gap-2 rounded-md px-4 text-sm font-semibold transition focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ps-gold)]",
+        "inline-flex h-10 items-center justify-center gap-2 rounded-lg px-4 text-sm font-semibold transition focus:outline-none focus-visible:ring-2 focus-visible:ring-[#bef264]",
         variant === "primary" &&
-          "bg-[var(--ps-blue)] text-white hover:bg-[var(--ps-blue-2)]",
+          "bg-[#1C2B1C] text-white hover:bg-[#2a3d2a]",
         variant === "secondary" &&
-          "border bg-[var(--ps-panel)] text-[color:var(--ps-fg)] hover:bg-black/[0.03]",
+          "border border-[#E8E8E8] bg-white text-[#1C2B1C] hover:bg-[#F5F5F5]",
         variant === "ghost" &&
-          "text-[color:var(--ps-muted)] hover:bg-black/[0.03] hover:text-[color:var(--ps-fg)]",
+          "text-[#1C2B1C]/70 hover:bg-[#F5F5F5] hover:text-[#1C2B1C]",
         className,
       )}
     />
   );
 }
-
-

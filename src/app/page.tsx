@@ -1,327 +1,516 @@
-import { Badge } from "@/components/ui/Badge";
-import { LinkButton } from "@/components/ui/Button";
+"use client";
+
+import { useRef } from "react";
+import Link from "next/link";
+import { motion, useScroll, useTransform } from "framer-motion";
+import ScrollAnimatedCard from "@/components/ScrollAnimatedCard";
+import { FloatingCreditCard } from "@/components/FloatingCreditCard";
 
 export default function Home() {
+  const heroRef = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: heroRef,
+    offset: ["start start", "end start"]
+  });
+
+  const heroOpacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
+  const heroScale = useTransform(scrollYProgress, [0, 0.5], [1, 0.95]);
+  const heroY = useTransform(scrollYProgress, [0, 0.5], [0, -50]);
+
+  const navItems = [
+    { href: "/dashboard/insights", label: "insights" },
+    { href: "/dashboard/reports", label: "reports" },
+    { href: "/dashboard/chat", label: "chat" },
+  ];
+
   return (
-    <div className="min-h-screen bg-[var(--ps-bg)]">
-      <header className="mx-auto flex max-w-6xl items-center justify-between px-6 py-6">
-        <div className="flex items-center gap-3">
-          <div className="flex items-center gap-3">
-            <div className="grid h-9 w-9 place-items-center rounded-lg border bg-[var(--ps-panel)] shadow-sm">
-              <div className="h-2.5 w-2.5 rounded-full bg-[var(--ps-blue)]" />
-            </div>
-            <div>
-              <div className="text-base font-semibold tracking-tight text-[color:var(--ps-fg)]">
-                PayScope
-              </div>
-              <div className="text-xs text-[color:var(--ps-subtle)]">
-                Visa-style reporting intelligence
-              </div>
-            </div>
-          </div>
-          <Badge tone="gold" className="hidden sm:inline-flex">
-            Visa Hackathon (Mock)
-          </Badge>
-        </div>
-        <div className="hidden items-center gap-4 md:flex">
-          <nav className="flex items-center gap-1 text-sm font-semibold text-[color:var(--ps-muted)]">
-            <a className="rounded-md px-3 py-2 hover:bg-black/[0.03] hover:text-[color:var(--ps-fg)]" href="/dashboard/insights">
-              Dashboard
-            </a>
-            <a className="rounded-md px-3 py-2 hover:bg-black/[0.03] hover:text-[color:var(--ps-fg)]" href="/dashboard/reports">
-              Reports
-            </a>
-            <a className="rounded-md px-3 py-2 hover:bg-black/[0.03] hover:text-[color:var(--ps-fg)]" href="/dashboard/chat">
-              AI Chat
-            </a>
-          </nav>
-          <div className="flex items-center gap-2">
-            <Badge tone="blue">AI-ready</Badge>
-            <Badge>Mocked data</Badge>
-          </div>
-        </div>
-      </header>
+    <div className="min-h-[200vh] bg-[#FAFAFA] overflow-x-hidden">
+      {/* Animated background blobs - lime green themed */}
+      <div className="fixed inset-0 overflow-hidden pointer-events-none">
+        <motion.div
+          className="absolute -top-[40%] -left-[20%] w-[80%] h-[80%] rounded-full"
+          style={{
+            background: "radial-gradient(circle, rgba(190,242,100,0.2) 0%, transparent 70%)",
+          }}
+          animate={{
+            x: [0, 50, 0],
+            y: [0, 30, 0],
+          }}
+          transition={{
+            duration: 20,
+            repeat: Infinity,
+            ease: "easeInOut"
+          }}
+        />
+        <motion.div
+          className="absolute -bottom-[30%] -right-[20%] w-[70%] h-[70%] rounded-full"
+          style={{
+            background: "radial-gradient(circle, rgba(28,43,28,0.08) 0%, transparent 70%)",
+          }}
+          animate={{
+            x: [0, -40, 0],
+            y: [0, -20, 0],
+          }}
+          transition={{
+            duration: 15,
+            repeat: Infinity,
+            ease: "easeInOut"
+          }}
+        />
+        <motion.div
+          className="absolute top-[30%] right-[5%] w-[40%] h-[40%] rounded-full"
+          style={{
+            background: "radial-gradient(circle, rgba(190,242,100,0.15) 0%, transparent 60%)",
+          }}
+          animate={{
+            x: [0, -30, 0],
+            y: [0, 40, 0],
+          }}
+          transition={{
+            duration: 18,
+            repeat: Infinity,
+            ease: "easeInOut"
+          }}
+        />
+      </div>
 
-      <main className="mx-auto max-w-6xl px-6 pb-16 pt-10">
-        <div className="grid gap-10 md:grid-cols-12">
-          <div className="md:col-span-7">
-            <div className="inline-flex items-center gap-2 rounded-full border bg-[var(--ps-panel)] px-3 py-1 text-xs font-semibold text-[color:var(--ps-muted)] shadow-sm">
-              Built for reporting intelligence · Not a payment system
-            </div>
+      {/* Navigation */}
+      <motion.header 
+        className="fixed top-0 left-0 right-0 z-50 px-6 py-5 bg-white/80 backdrop-blur-md border-b border-[#1C2B1C]/10"
+        initial={{ y: -100, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: 0.8, delay: 0.2 }}
+      >
+        <div className="mx-auto max-w-6xl flex items-center justify-between">
+          <motion.div 
+            className="flex items-center gap-2"
+            whileHover={{ scale: 1.02 }}
+          >
+            <Link href="/" className="text-2xl font-black tracking-tight text-[#1C2B1C]">
+              PayScope<span className="text-[#bef264]">.ai</span>
+            </Link>
+          </motion.div>
 
-            <h1 className="mt-5 text-4xl font-semibold leading-[1.06] tracking-tight text-[color:var(--ps-fg)] md:text-6xl">
-              PayScope — Turn payment reports into{" "}
-              <span className="text-[color:var(--ps-blue)]">intelligence</span>.
-            </h1>
-
-            <p className="mt-4 max-w-xl text-base leading-7 text-[color:var(--ps-muted)]">
-              AI-powered analytics for Visa & Mastercard authorization, settlement, and reconciliation reports.
-              Upload a file (mock), get dashboards instantly, then ask “why” in plain English.
-            </p>
-
-            <div className="mt-7 flex flex-col gap-3 sm:flex-row">
-              <LinkButton href="/dashboard" variant="primary">
-                View Demo Dashboard
-              </LinkButton>
-              <LinkButton
-                href="/dashboard/reports?sample=1"
-                variant="secondary"
+          <nav className="hidden md:flex items-center gap-8 text-sm font-medium text-[#1C2B1C]/60">
+            {navItems.map((item, i) => (
+              <motion.div
+                key={item.href}
+                initial={{ opacity: 0, y: -20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.3 + i * 0.1 }}
               >
-                Upload Sample Report
-              </LinkButton>
-            </div>
+                <Link
+                  href={item.href}
+                  className="hover:text-[#1C2B1C] transition-colors"
+                >
+                  <motion.span whileHover={{ y: -2 }} className="inline-block">
+                    {item.label}
+                  </motion.span>
+                </Link>
+              </motion.div>
+            ))}
+          </nav>
 
-            <div className="mt-9 grid gap-3 sm:grid-cols-3">
-              <div className="rounded-xl border bg-[var(--ps-panel)] p-4 shadow-sm">
-                <div className="text-xs font-semibold text-[color:var(--ps-subtle)]">
-                  Reports
-                </div>
-                <div className="mt-1 text-sm font-semibold text-[color:var(--ps-fg)]">
-                  Upload or select report packs
-                </div>
-                <div className="mt-1 text-xs text-[color:var(--ps-subtle)]">
-                  Visa/Mastercard · Auth + settlement (mock parse)
-                </div>
-              </div>
-              <div className="rounded-xl border bg-[var(--ps-panel)] p-4 shadow-sm">
-                <div className="text-xs font-semibold text-[color:var(--ps-subtle)]">
-                  Dashboards
-                </div>
-                <div className="mt-1 text-sm font-semibold text-[color:var(--ps-fg)]">
-                  KPIs + charts in one click
-                </div>
-                <div className="mt-1 text-xs text-[color:var(--ps-subtle)]">
-                  Trends, declines by hour, network comparisons
-                </div>
-              </div>
-              <div className="rounded-xl border bg-[var(--ps-panel)] p-4 shadow-sm">
-                <div className="text-xs font-semibold text-[color:var(--ps-subtle)]">
-                  Insights
-                </div>
-                <div className="mt-1 text-sm font-semibold text-[color:var(--ps-fg)]">
-                  Analyst answers that cite metrics
-                </div>
-                <div className="mt-1 text-xs text-[color:var(--ps-subtle)]">
-                  Deterministic today · RAG-ready tomorrow
-                </div>
-              </div>
-            </div>
+          <motion.div
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ delay: 0.6 }}
+          >
+            <Link
+              href="/dashboard"
+              className="inline-flex items-center gap-2 px-5 py-2.5 bg-[#1C2B1C] text-white text-sm font-semibold rounded-full hover:bg-[#2a3d2a] transition-all hover:shadow-lg hover:shadow-[#1C2B1C]/20"
+            >
+              join beta today
+            </Link>
+          </motion.div>
+        </div>
+      </motion.header>
 
-            <div className="mt-8 flex flex-wrap items-center gap-3 text-xs text-[color:var(--ps-subtle)]">
-              <span className="inline-flex items-center gap-2 rounded-full border bg-[var(--ps-panel)] px-3 py-1 shadow-sm">
-                <span className="h-1.5 w-1.5 rounded-full bg-[var(--ps-blue)]" />
-                Enterprise-grade UX
-              </span>
-              <span className="inline-flex items-center gap-2 rounded-full border bg-[var(--ps-panel)] px-3 py-1 shadow-sm">
-                <span className="h-1.5 w-1.5 rounded-full bg-[var(--ps-gold)]" />
-                Deterministic demo data
-              </span>
-              <span className="inline-flex items-center gap-2 rounded-full border bg-[var(--ps-panel)] px-3 py-1 shadow-sm">
-                <span className="h-1.5 w-1.5 rounded-full bg-[var(--ps-good)]" />
-                AI-ready API routes
-              </span>
-            </div>
+      {/* Hero Section */}
+      <motion.section 
+        ref={heroRef}
+        className="relative min-h-screen flex flex-col items-center justify-center px-6 pt-24"
+        style={{ opacity: heroOpacity, scale: heroScale, y: heroY }}
+      >
+        {/* Floating Credit Cards - only in hero */}
+        <FloatingCreditCard />
+        
+        <div className="relative z-10 max-w-5xl mx-auto text-center">
+          {/* Main Headline */}
+          <motion.h1 
+            className="text-[clamp(3rem,10vw,8rem)] font-black leading-[0.9] tracking-tight text-[#1C2B1C]"
+            initial={{ opacity: 0, y: 60 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1, delay: 0.3 }}
+          >
+            <motion.span 
+              className="block"
+              initial={{ opacity: 0, x: -50 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8, delay: 0.5 }}
+            >
+              AI-powered
+            </motion.span>
+            <motion.span 
+              className="block text-[#bef264]"
+              style={{ textShadow: "2px 2px 0 #1C2B1C" }}
+              initial={{ opacity: 0, x: 50 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8, delay: 0.7 }}
+            >
+              payment reporting.
+            </motion.span>
+          </motion.h1>
+
+          {/* Subtext */}
+          <motion.p 
+            className="mt-8 text-lg md:text-xl text-[#1C2B1C]/60 max-w-2xl mx-auto leading-relaxed"
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.9 }}
+          >
+            Modernize Visa/Mastercard authorization, clearing, and settlement reports with GenAI:
+            extract intelligence, chat in natural language, and ship dynamic dashboards instead of static files.
+          </motion.p>
+
+          {/* CTA Button */}
+          <motion.div
+            className="mt-10"
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.6, delay: 1.1 }}
+          >
+            <Link
+              href="/dashboard"
+              className="inline-flex items-center gap-2 px-8 py-4 bg-[#bef264] text-[#1C2B1C] text-base font-semibold rounded-full hover:bg-[#d4f794] transition-all hover:shadow-2xl hover:shadow-[#bef264]/40 hover:scale-105 border-2 border-[#1C2B1C]"
+            >
+              join beta today
+              <motion.span
+                animate={{ x: [0, 5, 0] }}
+                transition={{ duration: 1.5, repeat: Infinity }}
+              >
+                →
+              </motion.span>
+            </Link>
+          </motion.div>
+
+          {/* Scroll indicator */}
+          <motion.div
+            className="mt-16 flex flex-col items-center gap-2 text-[#1C2B1C]/40"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 1.5 }}
+          >
+            <span className="text-xs font-medium tracking-wider uppercase">scroll to explore</span>
+            <motion.div
+              animate={{ y: [0, 8, 0] }}
+              transition={{ duration: 1.5, repeat: Infinity }}
+            >
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <path d="M12 5v14M5 12l7 7 7-7" />
+              </svg>
+            </motion.div>
+          </motion.div>
+        </div>
+      </motion.section>
+
+      {/* Card Section */}
+      <section className="relative py-20">
+        <ScrollAnimatedCard />
+      </section>
+
+      {/* Cool Features Section */}
+      <section className="relative py-24 px-6 bg-white">
+        <div className="max-w-6xl mx-auto">
+          {/* Section Header */}
+          <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-8 mb-16">
+            <motion.h2 
+              className="text-5xl md:text-6xl font-black text-[#1C2B1C] leading-tight"
+              initial={{ opacity: 0, x: -40 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+            >
+              AI that<br /><span className="text-[#bef264]" style={{ textShadow: "1px 1px 0 #1C2B1C" }}>understands</span> reports.
+            </motion.h2>
+            <motion.p 
+              className="text-[#1C2B1C]/60 max-w-sm leading-relaxed"
+              initial={{ opacity: 0, x: 40 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+            >
+              Transform static Visa/Mastercard reports into interactive, insight-rich experiences:
+              discovery, parsing, RAG-backed answers, and AI-generated visuals tailored to each institution.
+            </motion.p>
           </div>
 
-          <div className="md:col-span-5">
-            <div className="rounded-2xl border bg-[var(--ps-panel)] p-6 shadow-[var(--ps-shadow)]">
-              <div className="flex items-center justify-between">
-                <div>
-                  <div className="text-sm font-semibold text-[color:var(--ps-fg)]">
-                    Dashboard snapshot
-                  </div>
-                  <div className="mt-0.5 text-xs text-[color:var(--ps-subtle)]">
-                    What you get immediately after parsing a report
-                  </div>
-                </div>
-                <Badge tone="blue">Live demo</Badge>
-              </div>
-
-              <div className="mt-5 overflow-hidden rounded-xl border">
-                <div className="flex items-center justify-between bg-[var(--ps-panel-2)] px-4 py-3">
-                  <div className="text-xs font-semibold text-[color:var(--ps-subtle)]">
-                    Selected report
-                  </div>
-                  <div className="flex items-center gap-2 text-[11px] font-semibold text-[color:var(--ps-subtle)]">
-                    <span className="rounded-full border bg-[var(--ps-panel)] px-2 py-1">
-                      Last 7 days
-                    </span>
-                    <span className="rounded-full border bg-[var(--ps-panel)] px-2 py-1">
-                      All networks
-                    </span>
-                  </div>
-                </div>
-                <div className="border-t bg-[var(--ps-panel)] p-4">
-                  <div className="grid gap-3 sm:grid-cols-3">
-                    <KpiSmall label="Auth success rate" value="91.8%" note="Late-night declines" tone="warn" />
-                    <KpiSmall label="Net settlement" value="$1.92M" note="Stable WoW" tone="neutral" />
-                    <KpiSmall label="Interchange" value="$34.6K" note="Trending upward" tone="info" />
-                  </div>
-
-                  <div className="mt-4 rounded-xl border bg-[var(--ps-panel-2)] p-4">
-                    <div className="flex items-center justify-between">
-                      <div className="text-xs font-semibold text-[color:var(--ps-subtle)]">
-                        Transactions over time
-                      </div>
-                      <div className="text-[11px] font-semibold text-[color:var(--ps-subtle)]">
-                        (sample)
-                      </div>
-                    </div>
-                    <MiniSparkline />
-                  </div>
-
-                  <div className="mt-4 overflow-hidden rounded-xl border">
-                    <div className="bg-[var(--ps-panel-2)] px-4 py-2 text-[11px] font-semibold text-[color:var(--ps-subtle)]">
-                      Exceptions (table preview)
-                    </div>
-                    <div className="divide-y bg-[var(--ps-panel)]">
-                      <MiniRow k="22:40 UTC" m="Issuer unavailable (91)" v="12 declines" />
-                      <MiniRow k="23:10 UTC" m="Do not honor (05)" v="9 declines" />
-                      <MiniRow k="02:05 UTC" m="Switch inoperative (91)" v="7 declines" />
-                    </div>
+          {/* Feature Cards Grid */}
+          <div className="grid md:grid-cols-2 gap-6">
+            {/* Large Card - In-app Dashboard */}
+            <motion.div
+              className="md:row-span-2 rounded-3xl p-8 relative overflow-hidden border-2 border-[#1C2B1C]"
+              style={{ backgroundColor: "#bef264" }}
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              whileHover={{ scale: 1.02 }}
+            >
+              <h3 className="text-4xl md:text-5xl font-black text-[#1C2B1C] leading-tight mb-4">
+                in-app<br />AI dashboards
+              </h3>
+              <Link 
+                href="/dashboard/insights"
+                className="inline-flex items-center gap-2 px-5 py-2.5 bg-[#1C2B1C] text-white text-sm font-semibold rounded-full hover:bg-[#2a3d2a] transition-all"
+              >
+                Learn more
+              </Link>
+              
+              {/* Chart visualization */}
+              <div className="mt-8 bg-white/40 rounded-2xl p-4 border border-[#1C2B1C]/20">
+                <div className="text-sm font-medium text-[#1C2B1C]/70 mb-2">Total visits ⓘ</div>
+                <div className="relative h-32">
+                  <svg viewBox="0 0 300 100" className="w-full h-full">
+                    <path
+                      d="M0 80 Q50 75 75 70 T150 50 T225 60 T300 30"
+                      fill="none"
+                      stroke="#1C2B1C"
+                      strokeWidth="2"
+                    />
+                    <circle cx="225" cy="60" r="4" fill="#1C2B1C" />
+                  </svg>
+                  <div className="absolute top-0 right-0 bg-white rounded-lg px-3 py-1 shadow-lg text-sm font-bold text-[#1C2B1C]">
+                    220,342,123
                   </div>
                 </div>
               </div>
+            </motion.div>
 
-              <div className="mt-4 overflow-hidden rounded-xl border">
-                <div className="flex items-center justify-between bg-[var(--ps-panel-2)] px-4 py-3">
-                  <div className="text-xs font-semibold text-[color:var(--ps-subtle)]">
-                    AI insight card (mock)
-                  </div>
-                  <div className="text-xs font-semibold text-[color:var(--ps-blue)]">
-                    Deterministic
-                  </div>
-                </div>
-                <div className="space-y-0 border-t bg-[var(--ps-panel)]">
-                  <div className="px-4 py-3">
-                    <div className="text-sm font-semibold text-[color:var(--ps-fg)]">
-                      Declines increased after 10 PM
-                    </div>
-                    <div className="mt-1 text-xs leading-5 text-[color:var(--ps-muted)]">
-                      Late-night declines run higher than daytime on a per-hour basis. Next cut: isolate issuer response codes
-                      and merchant entry mode to confirm the driver.
-                    </div>
-                    <div className="mt-3 flex flex-wrap gap-2">
-                      <Badge tone="gold">Watch</Badge>
-                      <Badge>Issuer codes</Badge>
-                      <Badge>Entry mode</Badge>
-                    </div>
-                  </div>
-                </div>
+            {/* Track Earnings Card */}
+            <motion.div
+              className="rounded-3xl p-8 relative overflow-hidden border border-[#E8E8E8]"
+              style={{ backgroundColor: "#F5F5F5" }}
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.1 }}
+              whileHover={{ scale: 1.02 }}
+            >
+              <h3 className="text-3xl md:text-4xl font-black text-[#1C2B1C] leading-tight mb-4">
+                RAG over<br />scheme reports
+              </h3>
+              <Link 
+                href="/dashboard/reports"
+                className="inline-flex items-center gap-2 px-5 py-2.5 bg-[#bef264] text-[#1C2B1C] text-sm font-semibold rounded-full hover:bg-[#d4f794] transition-all border border-[#1C2B1C]"
+              >
+                Learn more
+              </Link>
+              
+              {/* Earnings list */}
+              <div className="absolute right-6 top-6 text-right text-[#1C2B1C]/60 text-sm font-medium space-y-2">
+                <div>Auth vs. settle <span className="text-xs text-[#bef264] bg-[#1C2B1C] px-1.5 py-0.5 rounded">drift</span></div>
+                <div>Decline codes <span className="text-xs text-[#bef264] bg-[#1C2B1C] px-1.5 py-0.5 rounded">context</span></div>
+                <div>Fee impacts <span className="text-xs text-[#bef264] bg-[#1C2B1C] px-1.5 py-0.5 rounded">per issuer</span></div>
+                <div>Network splits <span className="text-xs text-[#bef264] bg-[#1C2B1C] px-1.5 py-0.5 rounded">live</span></div>
               </div>
+            </motion.div>
 
-              <div className="mt-5 border-t pt-4 text-xs text-[color:var(--ps-subtle)]">
-                AI is mocked and deterministic. API routes are structured for future RAG integration.
+            {/* Split Bills Card */}
+            <motion.div
+              className="rounded-3xl p-8 relative overflow-hidden border border-[#E8E8E8]"
+              style={{ backgroundColor: "#E8E8E8" }}
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              whileHover={{ scale: 1.02 }}
+            >
+              <h3 className="text-3xl md:text-4xl font-black text-[#1C2B1C] leading-tight mb-4">
+                natural language<br />AI assistant
+              </h3>
+              <Link 
+                href="/dashboard/chat"
+                className="inline-flex items-center gap-2 px-5 py-2.5 bg-[#1C2B1C] text-white text-sm font-semibold rounded-full hover:bg-[#2a3d2a] transition-all"
+              >
+                Learn more
+              </Link>
+              
+              {/* Stacked bars visualization */}
+              <div className="absolute right-6 top-6 flex gap-1">
+                {[60, 80, 100, 70, 90].map((h, i) => (
+                  <div 
+                    key={i} 
+                    className="w-6 rounded-t-lg"
+                    style={{ 
+                      height: `${h}px`, 
+                      backgroundColor: `rgba(190, 242, 100, ${0.4 + i * 0.15})`,
+                      border: "1px solid rgba(28,43,28,0.2)"
+                    }}
+                  />
+                ))}
               </div>
-            </div>
+            </motion.div>
           </div>
         </div>
+      </section>
 
-        <section className="mt-16">
-          <div className="rounded-2xl border bg-[var(--ps-panel-2)] p-8">
-            <div className="grid gap-6 md:grid-cols-12 md:items-start">
-              <div className="md:col-span-5">
-                <div className="text-sm font-semibold text-[color:var(--ps-fg)]">
-                  How PayScope works
-                </div>
-                <div className="mt-2 text-sm leading-6 text-[color:var(--ps-muted)]">
-                  A lightweight intelligence layer on top of existing Visa/Mastercard reports—built for fast investigation and clean executive summaries.
-                </div>
-              </div>
-              <div className="md:col-span-7">
-                <div className="grid gap-3 sm:grid-cols-3">
-                  <Step n="01" title="Ingest" desc="Upload CSV/Excel/PDF (mock), parse into a normalized model." />
-                  <Step n="02" title="Visualize" desc="KPIs + charts generated from report metrics in seconds." />
-                  <Step n="03" title="Explain" desc="Ask “what changed and why?”—answers reference numbers." />
-                </div>
-              </div>
-            </div>
+      {/* Different Levels Section */}
+      <section className="relative py-24 px-6 bg-[#FAFAFA]">
+        <div className="max-w-6xl mx-auto">
+          <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-8 mb-16">
+            <motion.h2 
+              className="text-5xl md:text-6xl font-black text-[#1C2B1C] leading-tight"
+              initial={{ opacity: 0, x: -40 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+            >
+              from static files<br />to <span className="text-[#bef264]" style={{ textShadow: "1px 1px 0 #1C2B1C" }}>live intelligence</span>.
+            </motion.h2>
+            <motion.div
+              className="flex flex-col gap-4"
+              initial={{ opacity: 0, x: 40 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+            >
+              <p className="text-[#1C2B1C]/60 max-w-sm leading-relaxed">
+                Start with discovery and parsing of card scheme reports, add RAG for explainability,
+                then layer in AI dashboards and forecasting. Built to adapt across clients and report types.
+              </p>
+              <Link
+                href="/dashboard"
+                className="inline-flex items-center gap-2 px-5 py-2.5 bg-[#1C2B1C] text-white text-sm font-semibold rounded-full hover:bg-[#2a3d2a] transition-all w-fit"
+              >
+                learn more
+              </Link>
+            </motion.div>
           </div>
-        </section>
-      </main>
-    </div>
-  );
-}
 
-function Row({ label, value }: { label: string; value: string }) {
-  return (
-    <div className="flex items-center justify-between gap-3 px-4 py-3">
-      <div className="text-sm font-semibold text-[color:var(--ps-fg)]">{label}</div>
-      <div className="text-xs font-semibold text-[color:var(--ps-muted)]">{value}</div>
-    </div>
-  );
-}
+          {/* Pricing/Level Cards */}
+          <motion.div
+            className="grid md:grid-cols-3 gap-6"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={{
+              hidden: {},
+              visible: { transition: { staggerChildren: 0.1 } }
+            }}
+          >
+            {[
+              { 
+                name: "Discovery", 
+                color: "#1C2B1C",
+                borderColor: "#1C2B1C",
+                textColor: "white",
+                checkColor: "#bef264",
+                features: ["Report cataloging", "Parsing pipelines", "Schema mapping"]
+              },
+              { 
+                name: "Intelligence", 
+                color: "#bef264",
+                borderColor: "#1C2B1C",
+                textColor: "#1C2B1C",
+                checkColor: "#1C2B1C",
+                features: ["RAG + LLM Q&A", "Anomaly surfacing", "Network/issuer splits", "Drift explanations"]
+              },
+              { 
+                name: "Enterprise AI", 
+                color: "#F5F5F5",
+                borderColor: "#E8E8E8",
+                textColor: "#1C2B1C",
+                checkColor: "#bef264",
+                features: ["Custom dashboards", "Forecasting & scenarios", "Multi-client theming", "Security & audit controls"]
+              },
+            ].map((tier, i) => (
+              <motion.div
+                key={i}
+                className="rounded-3xl p-8 relative overflow-hidden border-2"
+                style={{ 
+                  backgroundColor: tier.color,
+                  borderColor: tier.borderColor,
+                }}
+                variants={{
+                  hidden: { opacity: 0, y: 40 },
+                  visible: { opacity: 1, y: 0, transition: { duration: 0.6 } }
+                }}
+                whileHover={{ y: -8 }}
+              >
+                <h3 className="text-2xl font-bold mb-6" style={{ color: tier.textColor }}>
+                  {tier.name}
+                </h3>
+                <ul className="space-y-3" style={{ color: tier.textColor, opacity: 0.8 }}>
+                  {tier.features.map((feature, j) => (
+                    <li key={j} className="flex items-center gap-2">
+                      <span style={{ color: tier.checkColor }}>✓</span> {feature}
+                    </li>
+                  ))}
+                </ul>
+              </motion.div>
+            ))}
+          </motion.div>
+        </div>
+      </section>
 
-function Step({ n, title, desc }: { n: string; title: string; desc: string }) {
-  return (
-    <div className="rounded-xl border bg-[var(--ps-panel)] p-4 shadow-sm">
-      <div className="flex items-center justify-between">
-        <div className="text-xs font-semibold text-[color:var(--ps-subtle)]">{title}</div>
-        <div className="text-xs font-semibold text-[color:var(--ps-blue)]">{n}</div>
-      </div>
-      <div className="mt-2 text-sm font-semibold text-[color:var(--ps-fg)]">{desc}</div>
-    </div>
-  );
-}
+      {/* Stats Section */}
+      <section className="relative py-20 px-6 bg-[#1C2B1C]">
+        <motion.div 
+          className="max-w-4xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-6"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          variants={{
+            hidden: {},
+            visible: { transition: { staggerChildren: 0.1 } }
+          }}
+        >
+          {[
+            { value: "92.1%", label: "Auth Success" },
+            { value: "$1.9M", label: "Daily Volume" },
+            { value: "142ms", label: "Avg Latency" },
+            { value: "24/7", label: "Monitoring" },
+          ].map((stat, i) => (
+            <motion.div
+              key={i}
+              className="text-center p-6 rounded-2xl bg-white/5 backdrop-blur-sm border border-white/10"
+              variants={{
+                hidden: { opacity: 0, scale: 0.8 },
+                visible: { opacity: 1, scale: 1, transition: { duration: 0.5 } }
+              }}
+              whileHover={{ scale: 1.05, borderColor: "rgba(190,242,100,0.5)" }}
+            >
+              <div className="text-3xl md:text-4xl font-black text-[#bef264]">{stat.value}</div>
+              <div className="mt-2 text-sm text-white/60 font-medium">{stat.label}</div>
+            </motion.div>
+          ))}
+        </motion.div>
+      </section>
 
-function KpiSmall({
-  label,
-  value,
-  note,
-  tone,
-}: {
-  label: string;
-  value: string;
-  note: string;
-  tone: "warn" | "neutral" | "info";
-}) {
-  const noteClass =
-    tone === "warn"
-      ? "text-[color:var(--ps-warn)]"
-      : tone === "info"
-        ? "text-[color:var(--ps-blue)]"
-        : "text-[color:var(--ps-subtle)]";
-  return (
-    <div className="rounded-xl border bg-[var(--ps-panel-2)] p-4">
-      <div className="text-[11px] font-semibold text-[color:var(--ps-subtle)]">{label}</div>
-      <div className="mt-1 text-lg font-semibold text-[color:var(--ps-fg)]">{value}</div>
-      <div className={`mt-1 text-[11px] font-semibold ${noteClass}`}>{note}</div>
-    </div>
-  );
-}
-
-function MiniRow({ k, m, v }: { k: string; m: string; v: string }) {
-  return (
-    <div className="flex items-center justify-between gap-3 px-4 py-2">
-      <div className="text-[11px] font-semibold text-[color:var(--ps-subtle)]">{k}</div>
-      <div className="min-w-0 flex-1 truncate text-[11px] text-[color:var(--ps-muted)]">{m}</div>
-      <div className="text-[11px] font-semibold text-[color:var(--ps-fg)]">{v}</div>
-    </div>
-  );
-}
-
-function MiniSparkline() {
-  // Simple, static SVG sparkline (no client JS, no charts dependency on landing).
-  return (
-    <div className="mt-3">
-      <svg viewBox="0 0 240 60" className="h-[54px] w-full">
-        <path
-          d="M0 42 C 20 40, 28 30, 40 34 C 55 40, 66 46, 80 32 C 92 20, 110 16, 122 22 C 138 30, 150 28, 164 18 C 180 6, 202 14, 220 20 C 228 22, 234 20, 240 16"
-          fill="none"
-          stroke="rgba(20,52,203,0.85)"
-          strokeWidth="2.5"
-          strokeLinecap="round"
-        />
-        <path
-          d="M0 60 L0 42 C 20 40, 28 30, 40 34 C 55 40, 66 46, 80 32 C 92 20, 110 16, 122 22 C 138 30, 150 28, 164 18 C 180 6, 202 14, 220 20 C 228 22, 234 20, 240 16 L240 60 Z"
-          fill="rgba(20,52,203,0.10)"
-        />
-        <line x1="0" y1="59.5" x2="240" y2="59.5" stroke="rgba(15,23,42,0.12)" />
-      </svg>
-      <div className="mt-1 flex items-center justify-between text-[11px] text-[color:var(--ps-subtle)]">
-        <span>Dec 18</span>
-        <span>Dec 24</span>
-      </div>
+      {/* Footer CTA */}
+      <section className="relative py-32 px-6 bg-white">
+        <motion.div 
+          className="max-w-3xl mx-auto text-center"
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
+        >
+          <h2 className="text-4xl md:text-5xl font-black text-[#1C2B1C] mb-6">
+            Ready to simplify <span className="text-[#bef264]" style={{ textShadow: "1px 1px 0 #1C2B1C" }}>payments</span>?
+          </h2>
+          <p className="text-lg text-[#1C2B1C]/60 mb-10">
+            Join thousands of payment teams who trust PayScope for their intelligence layer.
+          </p>
+          <Link
+            href="/dashboard"
+            className="inline-flex items-center gap-2 px-10 py-5 bg-[#bef264] text-[#1C2B1C] text-lg font-semibold rounded-full hover:bg-[#d4f794] transition-all hover:shadow-2xl hover:shadow-[#bef264]/40 border-2 border-[#1C2B1C]"
+          >
+            Get started for free
+          </Link>
+        </motion.div>
+      </section>
     </div>
   );
 }

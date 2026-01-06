@@ -1,7 +1,7 @@
 import type { ComponentProps } from "react";
 import { cn } from "@/lib/utils";
 
-type Tone = "blue" | "gold" | "neutral";
+type Tone = "blue" | "gold" | "neutral" | "green";
 
 export function Badge({
   className,
@@ -12,14 +12,13 @@ export function Badge({
     <div
       {...props}
       className={cn(
-        "inline-flex items-center rounded-full border px-2.5 py-1 text-xs font-semibold text-[color:var(--ps-fg)]",
-        tone === "neutral" && "bg-black/[0.03] text-[color:var(--ps-muted)]",
-        tone === "blue" && "bg-[rgba(20,52,203,0.10)] text-[color:var(--ps-fg)]",
-        tone === "gold" && "bg-[rgba(247,182,0,0.14)] text-[color:var(--ps-fg)]",
+        "inline-flex items-center rounded-full border px-2.5 py-1 text-xs font-semibold",
+        tone === "neutral" && "bg-[#F5F5F5] text-[#1C2B1C]/70 border-[#E8E8E8]",
+        tone === "blue" && "bg-[#1C2B1C] text-white border-[#1C2B1C]",
+        tone === "gold" && "bg-[#bef264] text-[#1C2B1C] border-[#84cc16]",
+        tone === "green" && "bg-[#bef264]/20 text-[#1C2B1C] border-[#bef264]",
         className,
       )}
     />
   );
 }
-
-

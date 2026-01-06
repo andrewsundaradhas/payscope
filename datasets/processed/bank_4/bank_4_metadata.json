@@ -1,0 +1,18 @@
+{
+  "bank_id": 4,
+  "dataset_name": "Olist Brazilian E-commerce",
+  "source": "olistbr/brazilian-ecommerce",
+  "original_rows": 99441,
+  "processed_rows": 99441,
+  "columns": [
+    "transaction_id",
+    "merchant_id",
+    "order_status",
+    "order_purchase_timestamp",
+    "order_approved_at",
+    "order_delivered_carrier_date",
+    "order_delivered_customer_date",
+    "order_estimated_delivery_date"
+  ],
+  "checksum": "81f2e5a27459669a66c2803dd642bfc82c2a1b98b16219ae69c3883f7ea191f8"
+}

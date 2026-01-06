@@ -1,0 +1,64 @@
+version: "3.9"
+
+services:
+  api:
+    build: ./api
+    command: uvicorn payscope_api.app:app --host 0.0.0.0 --port 8000
+    env_file: .env
+    depends_on: 
+      - postgres
+      - redis
+      - minio
+      - neo4j
+    ports:
+      - "8000:8000"
+
+  ingestion:
+    build: ./ingestion
+    command: uvicorn payscope_ingestion.app:app --host 0.0.0.0 --port 8080
+    env_file: .env
+    depends_on:
+      - postgres
+      - redis
+      - minio
+
+  worker:
+    build: ./processing
+    command: celery -A payscope_processing.celery_app worker --loglevel=INFO
+    env_file: .env
+    depends_on:
+      - postgres
+      - redis
+      - minio
+      - neo4j
+
+  redis:
+    image: redis:7
+
+  postgres:
+    image: timescale/timescaledb:pg14-latest
+    environment:
+      POSTGRES_DB: payscope
+      POSTGRES_USER: payscope
+      POSTGRES_PASSWORD: payscope
+    ports:
+      - "5432:5432"
+
+  minio:
+    image: minio/minio
+    command: server /data --console-address ":9001"
+    environment:
+      MINIO_ROOT_USER: payscope
+      MINIO_ROOT_PASSWORD: payscope-secret
+    ports:
+      - "9000:9000"
+      - "9001:9001"
+
+  neo4j:
+    image: neo4j:5
+    environment:
+      NEO4J_AUTH: neo4j/zGJedIu6jdDiNJ99rZYkRVJC0t7_txINuNTduREVqqM
+    ports:
+      - "7474:7474"
+      - "7687:7687"
+

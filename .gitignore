@@ -39,3 +39,23 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# python
+**/__pycache__/
+**/*.py[cod]
+**/.pytest_cache/
+**/.mypy_cache/
+**/.ruff_cache/
+**/.venv/
+**/dist/
+**/build/
+**/*.egg-info/
+
+# Large dataset files (download separately)
+datasets/processed/bank_1/raw/creditcard.csv
+datasets/processed/bank_3/raw/PS_20174392719_1491204439457_log.csv
+datasets/processed/bank_1/bank_1_processed.csv
+datasets/processed/bank_4/raw/olist_geolocation_dataset.csv
+
+# Other large files
+*.pkl

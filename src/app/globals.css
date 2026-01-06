@@ -1,42 +1,56 @@
 @import "tailwindcss";
 
 :root {
-  /* PayScope — Visa-style palette (no gradients, enterprise neutral) */
-  --ps-bg: #ffffff;
+  /* PayScope — Lime Green + Forest Green palette */
+  --ps-bg: #FAFAFA;
   --ps-panel: #ffffff;
-  --ps-panel-2: #f6f8fc;
-  --ps-border: rgba(15, 23, 42, 0.12);
+  --ps-panel-2: #F5F5F5;
+  --ps-border: rgba(28, 43, 28, 0.12);
 
-  --ps-fg: rgba(11, 18, 32, 0.94);
-  --ps-muted: rgba(11, 18, 32, 0.72);
-  --ps-subtle: rgba(11, 18, 32, 0.56);
+  --ps-fg: #1C2B1C;
+  --ps-muted: rgba(28, 43, 28, 0.72);
+  --ps-subtle: rgba(28, 43, 28, 0.56);
 
-  --ps-blue: #1434cb; /* Visa blue */
-  --ps-blue-2: #1d3ef0;
-  --ps-gold: #f7b600;
-  --ps-good: #2ac28f;
+  /* Primary colors */
+  --ps-primary: #bef264; /* Lime green */
+  --ps-primary-dark: #84cc16;
+  --ps-primary-light: #d4f794;
+  
+  /* Secondary - Dark forest green */
+  --ps-secondary: #1C2B1C;
+  --ps-secondary-light: #2a3d2a;
+  
+  /* Accent colors */
+  --ps-blue: #1C2B1C; /* Using dark green instead of blue */
+  --ps-blue-2: #2a3d2a;
+  --ps-gold: #bef264; /* Lime green as accent */
+  --ps-good: #84cc16;
   --ps-warn: #f5b745;
   --ps-bad: #ff5b6b;
 
-  /* Dark hero panel (used for dashboard-style highlights) */
-  --ps-ink: #0b1220;
-  --ps-ink-2: #0f1a2e;
+  /* Dark panels */
+  --ps-ink: #1C2B1C;
+  --ps-ink-2: #2a3d2a;
 
-  --ps-shadow: 0 12px 26px rgba(15, 23, 42, 0.08);
+  --ps-shadow: 0 12px 26px rgba(28, 43, 28, 0.08);
 }
 
 @theme inline {
   --color-background: var(--ps-bg);
   --color-foreground: var(--ps-fg);
-  --font-sans: var(--font-geist-sans);
+  --font-serif: var(--font-serif);
   --font-mono: var(--font-geist-mono);
+}
+
+html {
+  font-size: 18px; /* Increased from default 16px for better readability */
 }
 
 body {
   background: var(--ps-bg);
   color: var(--ps-fg);
-  font-family: var(--font-sans), ui-sans-serif, system-ui, -apple-system,
-    Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+  font-family: var(--font-serif), "Cormorant Garamond", Georgia, "Times New Roman", serif;
+  font-size: 1rem; /* Uses the html font-size as base (18px) */
 }
 
 * {
@@ -44,5 +58,15 @@ body {
 }
 
 ::selection {
-  background: rgba(247, 182, 0, 0.26);
+  background: rgba(190, 242, 100, 0.3);
+}
+
+/* Perspective utility for 3D transforms */
+.perspective-\[1500px\] {
+  perspective: 1500px;
+}
+
+/* Font utility classes */
+.font-serif {
+  font-family: var(--font-serif), "Cormorant Garamond", Georgia, "Times New Roman", serif;
 }

@@ -1,0 +1,21 @@
+groups:
+  - name: payscope-alerts
+    rules:
+      - alert: HighJobFailureRate
+        expr: increase(job_failure_total[5m]) > 5
+        for: 2m
+        labels:
+          severity: critical
+        annotations:
+          summary: "Job failure spike"
+      - alert: HighQueryLatency
+        expr: histogram_quantile(0.95, sum(rate(query_latency_seconds_bucket[5m])) by (le)) > 2
+        for: 5m
+        labels:
+          severity: warn
+        annotations:
+          summary: "P95 query latency above 2s"
+
+
+
+
